@@ -8,6 +8,7 @@ public class Mouse implements MouseInputListener {
 	private int x = -1;
 	private int y = -1;
 	private int mouseButton = -1;
+	public int oneClick = -1;
 	
 	public int getX() {
 		return x;
@@ -22,6 +23,7 @@ public class Mouse implements MouseInputListener {
 	}
 	
 	public void mouseClicked(MouseEvent e) {
+		oneClick = e.getButton();
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -34,11 +36,11 @@ public class Mouse implements MouseInputListener {
 
 	public void mousePressed(MouseEvent e) {
 		mouseButton = e.getButton();
-		
 	}
 
 	public void mouseReleased(MouseEvent e) {
 		mouseButton = -1;
+		oneClick = -1;
 	}
 
 	public void mouseDragged(MouseEvent e) {

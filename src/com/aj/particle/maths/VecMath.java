@@ -23,6 +23,13 @@ public class VecMath {
 		
 	}
 	
+	public static double calcLength(double x, double y) {
+		
+		double result = (x*x) + (y*y);
+		result = Math.sqrt(result);
+		return result;
+	}
+	
 	public static Vector3i calcDifference(Vector3i vec1, Vector3i vec2) {
 
 		int x = vec1.getX() - vec2.getX();

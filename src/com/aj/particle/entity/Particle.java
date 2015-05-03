@@ -15,6 +15,8 @@ public class Particle {
 	private int life;
 	private double dx;
 	private double dy;
+	private double accX;
+	private double accY;
 	
 	private float radius;
 	private boolean delete = false;
@@ -28,13 +30,16 @@ public class Particle {
 		this.screen = screen;
 		color = rand.nextInt();
 		
-		life = Math.abs(rand.nextInt() % 70);
-		life += 30;
+		life = Math.abs(rand.nextInt() % 7000);
+		life += 3000;
 		dx = 1.0 - ((rand.nextDouble()*10) % 2.0);
 		dy = 1.0 - ((rand.nextDouble()*10) % 2.0);
 
 		this.split_radius = split_radius;
 		radius = 2 + (rand.nextInt() % 5) / split_radius;
+		
+		accX = 0;
+		accY = 0;
 		
 		this.split = split;
 	}
@@ -45,9 +50,9 @@ public class Particle {
 		if (time > life) {
 			delete = true;
 		}
-		posY += dx * 6;
-		posX += dy * 6;
-//		radius += 0.01;
+		posX += dx * 6;
+		posY += dy * 6;
+
 	}
 	
 	// if the particles life runs out then return true
@@ -59,12 +64,12 @@ public class Particle {
 	public void render() {
 		for (int y = (int) (posY - radius); y < posY + radius; y++) {
 			if (y < 0 || y >= screen.getHeight()) {
-				delete = true;
+//				delete = true;
 				break;
 			}
 			for (int x = (int) (posX - radius); x < posX + radius; x++) {
 				if (x < 0 || x >= screen.getWidth()) {
-					delete = true;
+//					delete = true;
 					break;		
 				}
 
@@ -84,6 +89,24 @@ public class Particle {
 	
 	public double getY() {
 		return posY;
+	}
+	
+	public double getAccX() {
+		return accX;
+	}
+	
+	public double getAccY() {
+		return accY;
+	}
+	
+	public void setdX(double x) {
+		accX = x;
+		dx = x;
+	}
+	
+	public void setdY(double y) {
+		accY = y;
+		dy = y;
 	}
 	
 	public int getSplit() {
