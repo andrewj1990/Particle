@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -38,6 +39,10 @@ public class Main extends Canvas implements Runnable {
 	public Main() {
 		frame = new JFrame("Particle | fps : 0");
 		thread = new Thread(this, "display");
+		
+//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//		this.width = screenSize.width;
+//		this.height = screenSize.height;
 		
 		Dimension dimension = new Dimension(width, height);
 
@@ -124,19 +129,19 @@ public class Main extends Canvas implements Runnable {
 				
 				// separate colours into its components in order to calculate diffuse lighting
 				int colour = screen.pixels[x + y * getWidth()];
-				int r = (colour >> 16) & 0xff;
-				int g = (colour >>  8) & 0xff;
-				int b = (colour		 ) & 0xff;
-				float diffuse = light.diffuseLight();
-				
-				r *= diffuse;
-				g *= diffuse;
-				b *= diffuse;
-				
-				r = (r << 16);
-				g = (g << 8);
-				
-				colour = r | g | b;
+//				int r = (colour >> 16) & 0xff;
+//				int g = (colour >>  8) & 0xff;
+//				int b = (colour		 ) & 0xff;
+//				float diffuse = light.diffuseLight();
+//				
+//				r *= diffuse;
+//				g *= diffuse;
+//				b *= diffuse;
+//				
+//				r = (r << 16);
+//				g = (g << 8);
+//				
+//				colour = r | g | b;
 				pixels[x + y * getWidth()] = colour;
 				
 			}

@@ -28,7 +28,8 @@ public class Particle {
 		this.posX = x;
 		this.posY = y;
 		this.screen = screen;
-		color = rand.nextInt();
+		color = rand.nextInt(255);
+		color = color << 8;
 		
 		life = Math.abs(rand.nextInt() % 7000);
 		life += 3000;
@@ -46,6 +47,14 @@ public class Particle {
 	
 
 	public void update() {
+		
+		color = (color >> 8) & 0xff;
+		color *= 0.99999;
+//		System.out.println("color : " + color);
+		color = (color << 8);
+		
+		if (color < 1) delete = true;
+		
 		time++;
 		if (time > life) {
 			delete = true;
@@ -60,7 +69,7 @@ public class Particle {
 		return delete;
 	}
 	
-	// when a new particle is created set that pixel to blue
+	// draw particle on screen
 	public void render() {
 		for (int y = (int) (posY - radius); y < posY + radius; y++) {
 			if (y < 0 || y >= screen.getHeight()) {

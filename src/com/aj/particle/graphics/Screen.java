@@ -43,8 +43,8 @@ public class Screen {
 		
 		player = new Sprite("/res/player.png");
 		
-		emitted_particles = 20;
-		particle_splits = 2;
+		emitted_particles = 200;
+		particle_splits = 0;
 		
 		this.mouse = mouse;
 		this.keys = keys;
@@ -173,7 +173,7 @@ public class Screen {
 	// clear screen, set all pixels to black
 	public void clear() {
 		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = 0x44;
+			pixels[i] = 0x090E0D;
 		}
 	}
 	
