@@ -138,10 +138,7 @@ public class Main extends Canvas implements Runnable {
 //				g *= diffuse;
 //				b *= diffuse;
 //				
-//				r = (r << 16);
-//				g = (g << 8);
-//				
-//				colour = r | g | b;
+//				colour = (r << 16) | (g << 8) | b;
 				pixels[x + y * getWidth()] = colour;
 				
 			}
@@ -150,8 +147,10 @@ public class Main extends Canvas implements Runnable {
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		g.setColor(Color.WHITE);
 		g.drawString("Particles : " + screen.getParticlesSize(), 10, 20);
-		g.drawString("Emitted Particles : " + screen.getEmittedParticles(), 10, 35);
-		g.drawString("Particle Splits : " + screen.getParticleSplits(), 10, 50);
+		g.drawString("Emitted Particles : " + screen.getEmittedParticles() + " (up, down)", 10, 35);
+//		g.drawString("Particle Splits : " + screen.getParticleSplits(), 10, 50);
+		g.drawString("Spacebar to clear", 10, 50);		
+		
 		g.dispose();
 		bs.show();
 		

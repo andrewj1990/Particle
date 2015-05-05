@@ -55,8 +55,8 @@ public class Screen {
 		keys.update();
 		if (keys.up) emitted_particles++;
 		if (keys.down && emitted_particles > 0) emitted_particles--; 
-		if (keys.right) particle_splits++;
-		if (keys.left && particle_splits > 0) particle_splits--;
+//		if (keys.right) particle_splits++;
+//		if (keys.left && particle_splits > 0) particle_splits--;
 		// space bar -- clear screen
 		if (keys.space) {
 			particle_list.clear(); 

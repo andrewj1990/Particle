@@ -31,6 +31,8 @@ public class Particle {
 		color = rand.nextInt(255);
 		color = color << 8;
 		
+		color = 0xffffff;
+		
 		life = Math.abs(rand.nextInt() % 7000);
 		life += 3000;
 		dx = 1.0 - ((rand.nextDouble()*10) % 2.0);
@@ -39,6 +41,7 @@ public class Particle {
 		this.split_radius = split_radius;
 		radius = 2 + (rand.nextInt() % 5) / split_radius;
 		
+		radius = 1;
 		accX = 0;
 		accY = 0;
 		
@@ -48,10 +51,17 @@ public class Particle {
 
 	public void update() {
 		
-		color = (color >> 8) & 0xff;
-		color *= 0.99999;
-//		System.out.println("color : " + color);
-		color = (color << 8);
+		int r = (color >> 16) & 0xff;
+		int g = (color >> 8) & 0xff;
+		int b = (color) & 0xff;
+		
+		if (r > 200) {
+			r *= 0.9999999;
+			g *= 0.9999999;
+			b *= 0.9999999;
+		}
+		
+		color = (r << 16) | (g << 8) | b;
 		
 		if (color < 1) delete = true;
 		
@@ -59,8 +69,8 @@ public class Particle {
 		if (time > life) {
 			delete = true;
 		}
-		posX += dx * 6;
-		posY += dy * 6;
+		posX += dx * 1;
+		posY += dy * 1;
 
 	}
 	
