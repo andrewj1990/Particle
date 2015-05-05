@@ -31,7 +31,7 @@ public class Particle {
 		color = rand.nextInt(255);
 		color = color << 8;
 		
-		color = 0xffffff;
+		color = 0x001133;
 		
 		life = Math.abs(rand.nextInt() % 7000);
 		life += 3000;
@@ -51,26 +51,12 @@ public class Particle {
 
 	public void update() {
 		
-		int r = (color >> 16) & 0xff;
-		int g = (color >> 8) & 0xff;
-		int b = (color) & 0xff;
-		
-		if (r > 200) {
-			r *= 0.9999999;
-			g *= 0.9999999;
-			b *= 0.9999999;
-		}
-		
-		color = (r << 16) | (g << 8) | b;
-		
-		if (color < 1) delete = true;
-		
 		time++;
-		if (time > life) {
+		if (time > life)
 			delete = true;
-		}
-		posX += dx * 1;
-		posY += dy * 1;
+		
+		posX += dx;
+		posY += dy;
 
 	}
 	
@@ -81,22 +67,28 @@ public class Particle {
 	
 	// draw particle on screen
 	public void render() {
-		for (int y = (int) (posY - radius); y < posY + radius; y++) {
-			if (y < 0 || y >= screen.getHeight()) {
-//				delete = true;
-				break;
-			}
-			for (int x = (int) (posX - radius); x < posX + radius; x++) {
-				if (x < 0 || x >= screen.getWidth()) {
-//					delete = true;
-					break;		
-				}
-
+		for (int y = (int) (posY - radius); y <= posY + radius; y++) {
+			if (y < 0 || y >= screen.getHeight()) break;
+			for (int x = (int) (posX - radius); x <= posX + radius; x++) {
+				if (x < 0 || x >= screen.getWidth()) break;		
 				int cx = (int) (y - posY);
 				int cy = (int) (x - posX);
 				float r = radius * radius;
 				if ((cx*cx + cy*cy) <= r) {
-					screen.pixels[x + y * screen.getWidth()] = color;
+					if (screen.pixels[x + y * screen.getWidth()] > 0xffffff) screen.pixels[x + y * screen.getWidth()] = 0x00ffff;
+					else {
+						int red = (color >> 16) & 0xff;
+						int green = (color >> 8) & 0xff;
+						int blue = (color) & 0xff;
+						
+						red *= 1.001;
+						green *= 1.001;
+						blue *= 1.0001;
+						
+						color =  (red << 16) | (green << 8) | blue;
+						
+						screen.pixels[x + y * screen.getWidth()] += color;
+					}
 				} 
 			}
 		}

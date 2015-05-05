@@ -22,7 +22,7 @@ public class Screen {
 	
 	private Mouse mouse;
 	private Keyboard keys;
-	private Sprite player;
+//	private Sprite player;
 	
 	private List<Particle> particle_list = new ArrayList<Particle>();
 	private List<GravityHole> gravity_list = new ArrayList<GravityHole>();
@@ -41,7 +41,7 @@ public class Screen {
 			map[i] = rand.nextInt();
 		}
 		
-		player = new Sprite("/res/player.png");
+//		player = new Sprite("/res/player.png");
 		
 		emitted_particles = 200;
 		particle_splits = 0;
