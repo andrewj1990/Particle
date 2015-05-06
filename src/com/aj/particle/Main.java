@@ -148,7 +148,7 @@ public class Main extends Canvas implements Runnable {
 		g.drawString("Particles : " + screen.getParticlesSize(), 10, 20);
 		g.drawString("Emitted Particles : " + screen.getEmittedParticles() + " (up, down)", 10, 35);
 //		g.drawString("Particle Splits : " + screen.getParticleSplits(), 10, 50);
-		g.drawString("Right click to add particles | Left click to add vacuum hole", 10, 50);	
+		g.drawString("Left click to add particles | Right click to add vacuum hole", 10, 50);	
 		g.drawString("Spacebar to clear", 10, 65);	
 		
 		g.dispose();
