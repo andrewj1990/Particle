@@ -4,8 +4,8 @@ import com.aj.particle.graphics.Screen;
 
 public class GravityHole {
 
-	private double posX;
-	private double posY;
+	private float posX;
+	private float posY;
 	
 	private Screen screen;
 	
@@ -16,6 +16,7 @@ public class GravityHole {
 		this.screen = screen;
 	}
 	
+	// render gravity well
 	public void render() {
 		for (int y = (int) (posY - 10); y < posY + 10; y++) {
 			if (y < 0 || y >= screen.getHeight()) break;
@@ -31,11 +32,11 @@ public class GravityHole {
 		}
 	}
 	
-	public double getX() {
+	public float getX() {
 		return posX;
 	}
 	
-	public double getY() {
+	public float getY() {
 		return posY;
 	}
 	

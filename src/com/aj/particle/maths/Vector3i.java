@@ -20,7 +20,6 @@ public class Vector3i {
 	
 	// calculate the dot product
 	public int dot(Vector3i vec) {
-		
 		int normal = x * vec.getX() + y * vec.getY() + z * vec.getZ();		
 		return normal;
 	}

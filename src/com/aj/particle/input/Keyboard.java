@@ -18,7 +18,7 @@ public class Keyboard implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// if a key is pressed then set the keycode to true
+		// if a key is pressed then set the key pressed index to true
 		keyPresses[e.getKeyCode()] = true;
 	}
 

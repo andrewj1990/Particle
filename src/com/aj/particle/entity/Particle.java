@@ -6,40 +6,40 @@ import com.aj.particle.graphics.Screen;
 
 public class Particle {
 
-	private double posX;
-	private double posY;
-	private Screen screen;
-	private Random rand = new Random();
+	private float posX;
+	private float posY;
 	private int color;
 	private int time = 0;
 	private int life;
-	private double dx;
-	private double dy;
-	private double accX;
-	private double accY;
-	
+	private float dx;
+	private float dy;
+	private float accX;
+	private float accY;
 	private float radius;
 	private boolean delete = false;
-	
 	private int split;
 	private int split_radius;
+	
+	private Screen screen;
+	private Random rand = new Random();
 
 	public Particle(int x, int y, Screen screen, int split, int split_radius) {
 		this.posX = x;
 		this.posY = y;
 		this.screen = screen;
-		color = rand.nextInt(255);
-		color = color << 8;
 		
+		// initialize colour
 		color = 0x001133;
 		
-		life = Math.abs(rand.nextInt() % 7000);
-		life += 3000;
-		dx = 1.0 - ((rand.nextDouble()*10) % 2.0);
-		dy = 1.0 - ((rand.nextDouble()*10) % 2.0);
+		// set lifespan of particle
+		life = 3000 + Math.abs(rand.nextInt() % 7000);
+		
+		// set the direction of each particle to travel randomly
+		dx = 1.0f - ((rand.nextFloat()*10) % 2.0f);
+		dy = 1.0f - ((rand.nextFloat()*10) % 2.0f);
 
 		this.split_radius = split_radius;
-		radius = 2 + (rand.nextInt() % 5) / split_radius;
+//		radius = 1 + (rand.nextInt() % 3) / split_radius;		
 		
 		radius = 1;
 		accX = 0;
@@ -51,9 +51,9 @@ public class Particle {
 
 	public void update() {
 		
+		// if the particle runs out of time then set delete to true
 		time++;
-		if (time > life)
-			delete = true;
+		if (time > life) delete = true;
 		
 		posX += dx;
 		posY += dy;
@@ -75,12 +75,16 @@ public class Particle {
 				int cy = (int) (x - posX);
 				float r = radius * radius;
 				if ((cx*cx + cy*cy) <= r) {
-					if (screen.pixels[x + y * screen.getWidth()] > 0xffffff) screen.pixels[x + y * screen.getWidth()] = 0x00ffff;
-					else {
+					// change the colour of the particles based on the amount of particle density
+					if (screen.pixels[x + y * screen.getWidth()] > 0xffffff) {
+						screen.pixels[x + y * screen.getWidth()] = 0x00ffff;
+					} else {
+						// get rgb components
 						int red = (color >> 16) & 0xff;
 						int green = (color >> 8) & 0xff;
 						int blue = (color) & 0xff;
 						
+						// increase each colour component
 						red *= 1.001;
 						green *= 1.001;
 						blue *= 1.0001;
@@ -94,28 +98,28 @@ public class Particle {
 		}
 	}
 	
-	public double getX() {
+	public float getX() {
 		return posX;
 	}
 	
-	public double getY() {
+	public float getY() {
 		return posY;
 	}
 	
-	public double getAccX() {
+	public float getAccX() {
 		return accX;
 	}
 	
-	public double getAccY() {
+	public float getAccY() {
 		return accY;
 	}
 	
-	public void setdX(double x) {
+	public void setdX(float x) {
 		accX = x;
 		dx = x;
 	}
 	
-	public void setdY(double y) {
+	public void setdY(float y) {
 		accY = y;
 		dy = y;
 	}

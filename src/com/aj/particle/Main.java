@@ -39,12 +39,14 @@ public class Main extends Canvas implements Runnable {
 		frame = new JFrame("Particle | fps : 0");
 		thread = new Thread(this, "display");
 		
+		// get the screen size
 //		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 //		this.width = screenSize.width;
 //		this.height = screenSize.height;
 		
 		Dimension dimension = new Dimension(width, height);
-
+		
+		// set options for frame
 		frame.setPreferredSize(dimension);
 		frame.add(this);
 		frame.pack();
@@ -56,13 +58,16 @@ public class Main extends Canvas implements Runnable {
 		// add the keyboard and key listener
 		keys = new Keyboard();
 		addKeyListener(keys);
+		
 		// add mouse listener and motion listener
 		mouse = new Mouse();
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
+		
 		screen = new Screen(getWidth(), getHeight(), mouse, keys);
 		light = new Light();
 		
+		// create image based on size of canvas
 		image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
 		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 		
@@ -130,7 +135,7 @@ public class Main extends Canvas implements Runnable {
 				int colour = screen.pixels[x + y * getWidth()];
 //				int r = (colour >> 16) & 0xff;
 //				int g = (colour >>  8) & 0xff;
-//				int b = (colour		 ) & 0xff;
+//				int b = (colour) & 0xff;
 //				float diffuse = light.diffuseLight();
 //				
 //				r *= diffuse;
@@ -142,13 +147,13 @@ public class Main extends Canvas implements Runnable {
 				
 			}
 		}
+		
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		g.setColor(Color.WHITE);
 		g.drawString("Particles : " + screen.getParticlesSize(), 10, 20);
 		g.drawString("Emitted Particles : " + screen.getEmittedParticles() + " (up, down)", 10, 35);
-//		g.drawString("Particle Splits : " + screen.getParticleSplits(), 10, 50);
-		g.drawString("Left click to add particles | Right click to add vacuum hole", 10, 50);	
+		g.drawString("Left click to add particles | Right click to add gravity well", 10, 50);	
 		g.drawString("Spacebar to clear", 10, 65);	
 		
 		g.dispose();
